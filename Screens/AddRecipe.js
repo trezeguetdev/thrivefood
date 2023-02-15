@@ -3,23 +3,24 @@ import { StyleSheet, View, Text, TextInput, ScrollView, TouchableOpacity } from 
 import axios from 'axios';
 
 export default function AddRecipe({ navigation }) {
-    const [name, setName] = useState('');
-    const [time, setTime] = useState('');
-    const [portions, setPortions] = useState('');
-    const [author, setAuthor] = useState('');
+    const [nome, setNome] = useState('');
+    const [tempodepreparo, setTempodePreparo] = useState('');
+    const [modo_preparo, setModo_preparo] = useState('');
+    const [facilidade, setFacilidade] = useState('');
     const [image, setImage] = useState('');
-    const [ingredients, setIngredients] = useState(['']);
-    const [instructions, setInstructions] = useState(['']);
+    const [tempo_preparo, setTempo_preparo] = useState(['']);
+    const [autor, setAutor] = useState(['']);
+    const [rendimento, setRendimento] = useState(['']);
 
     function handleSubmit() {
-        axios.post('http://192.168.18.2:3000/recipes', {
-            name,
-            time,
-            portions,
-            author,
-            image,
-            ingredients,
-            instructions,
+        axios.post('https://api-receitas-production.up.railway.app/receitas/vegano', {
+            nome,
+            ingredientes,
+            modo_preparo,
+            facilidade,
+            tempo_preparo,
+            autor,
+            rendimento
         })
             .then(response => {
                 navigation.navigate('RecipeList');
@@ -28,43 +29,43 @@ export default function AddRecipe({ navigation }) {
                 console.log(error);
             });
     }
-    function handleAddIngredient() {
-        setIngredients([...ingredients, '']);
+    function handleAddIngredientes() {
+        setIngredientes([...ingredientes, '']);
     }
 
-    function handleRemoveIngredient(index) {
-        const newIngredients = [...ingredients];
-        newIngredients.splice(index, 1);
-        setIngredients(newIngredients);
+    function handleRemoveIngredientes(index) {
+        const newIngredientes = [...ingredientes];
+        newIngredientes.splice(index, 1);
+        setIngredientes(newIngredientes);
     }
 
     function handleAddInstruction() {
-        setInstructions([...instructions, '']);
+        setMododePreparo([...mododepreparo, '']);
     }
 
     function handleRemoveInstruction(index) {
-        const newInstructions = [...instructions];
-        newInstructions.splice(index, 1);
-        setInstructions(newInstructions);
+        const newMododePreparo = [...mododepreparo];
+        newMododePreparo.splice(index, 1);
+        setMododePreparo(newMododePreparo);
     }
 
     return (
         <ScrollView style={styles.container}>
             <View style={styles.formGroup}>
                 <Text style={styles.label}>Nome:</Text>
-                <TextInput style={styles.input} value={name} onChangeText={setName} />
+                <TextInput style={styles.input} value={nome} onChangeText={setNome} />
             </View>
             <View style={styles.formGroup}>
                 <Text style={styles.label}>Tempo:</Text>
-                <TextInput style={styles.input} value={time} onChangeText={setTime} />
+                <TextInput style={styles.input} value={tempodepreparo} onChangeText={setTempodePreparo} />
             </View>
             <View style={styles.formGroup}>
-                <Text style={styles.label}>Porções:</Text>
-                <TextInput style={styles.input} value={portions} onChangeText={setPortions} />
+                <Text style={styles.label}>rendimento; :</Text>
+                <TextInput style={styles.input} value={rendimento} onChangeText={setRendimento} />
             </View>
             <View style={styles.formGroup}>
                 <Text style={styles.label}>Autor:</Text>
-                <TextInput style={styles.input} value={author} onChangeText={setAuthor} />
+                <TextInput style={styles.input} value={autordareceita} onChangeText={setAutordaReceita} />
             </View>
             <View style={styles.formGroup}>
                 <Text style={styles.label}>Imagem:</Text>
@@ -72,37 +73,37 @@ export default function AddRecipe({ navigation }) {
             </View>
             <View style={styles.formGroup}>
                 <Text style={styles.label}>Ingredientes:</Text>
-                {ingredients.map((ingredient, index) => (
+                {ingredientes.map((ingredientes, index) => (
                     <View key={index} style={styles.listItem}>
                         <TextInput
                             style={styles.listItemText}
-                            value={ingredient}
+                            value={ingredientes}
                             onChangeText={text => {
-                                const newIngredients = [...ingredients];
-                                newIngredients[index] = text;
-                                setIngredients(newIngredients);
+                                const newIngredientes = [...ingredientes];
+                                newIngredientes[index] = text;
+                                setIngredientes(newIngredientes);
                             }}
                         />
-                        <TouchableOpacity style={styles.listItemButton} onPress={() => handleRemoveIngredient(index)}>
+                        <TouchableOpacity style={styles.listItemButton} onPress={() => handleRemoveIngredientes(index)}>
                             <Text style={styles.listItemButtonText}>X</Text>
                         </TouchableOpacity>
                     </View>
                 ))}
-                <TouchableOpacity style={styles.button} onPress={handleAddIngredient}>
+                <TouchableOpacity style={styles.button} onPress={handleAddIngredientes}>
                     <Text style={styles.buttonText}>Adicionar Ingrediente</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.formGroup}>
                 <Text style={styles.label}>Instruções:</Text>
-                {instructions.map((instruction, index) => (
+                {mododepreparo.map((instruction, index) => (
                     <View key={index} style={styles.listItem}>
                         <TextInput
                             style={styles.listItemText}
                             value={instruction}
                             onChangeText={text => {
-                                const newInstructions = [...instructions];
-                                newInstructions[index] = text;
-                                setInstructions(newInstructions);
+                                const newMododePreparo = [...mododepreparo];
+                                newMododePreparo[index] = text;
+                                setMododePreparo(newMododePreparo);
                             }}
                         />
                         <TouchableOpacity style={styles.listItemButton} onPress={() => handleRemoveInstruction(index)}>

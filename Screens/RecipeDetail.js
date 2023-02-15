@@ -6,7 +6,7 @@ export default function RecipeDetail({ route }) {
     const [recipe, setRecipe] = useState(null);
 
     useEffect(() => {
-        axios.get(`http://192.168.18.2/recipes/${route.params.id}`)
+        axios.get(`https://api-receitas-production.up.railway.app/receitas/${route.params.id}`)
             .then(response => {
                 setRecipe(response.data);
             })
@@ -23,15 +23,15 @@ export default function RecipeDetail({ route }) {
         <ScrollView style={styles.container}>
             <Image source={{ uri: recipe.image }} style={styles.recipeImage} />
             <View style={styles.recipeDetails}>
-                <Text style={styles.recipeTitle}>{recipe.name}</Text>
-                <Text style={styles.recipeInfo}>{recipe.time} minutos | {recipe.portions} porções | {recipe.author}</Text>
+                <Text style={styles.recipeTitle}>{recipe.nome}</Text>
+                <Text style={styles.recipeInfo}>{recipe.tempodepreparo} | {recipe.rendimento} | {recipe.autordareceita}</Text>
                 <Text style={styles.recipeIngredientsTitle}>Ingredientes</Text>
                 {recipe.ingredients.map((ingredient, index) => (
-                    <Text key={index} style={styles.recipeIngredients}>{ingredient}</Text>
+                    <Text key={index} style={styles.recipeIngredients}>{ingredientes}</Text>
                 ))}
                 <Text style={styles.recipeInstructionsTitle}>Modo de preparo</Text>
                 {recipe.instructions.map((instruction, index) => (
-                    <Text key={index} style={styles.recipeInstructions}>{instruction}</Text>
+                    <Text key={index} style={styles.recipeInstructions}>{mododepreparo}</Text>
                 ))}
             </View>
         </ScrollView>

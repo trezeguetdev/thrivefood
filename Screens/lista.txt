@@ -1,0 +1,32 @@
+01 vídeo de preparo da receita; 
+
+tempo de preparo; 
+
+rendimento; 
+
+autor da receita; 
+
+ingredientes e; 
+
+modo de preparo. 
+
+
+
+
+
+
+
+INSERT INTO sobremesa (nome, ingredientes, modo_preparo, facilidade, tempo_preparo, autor, rendimento) VALUES ('Mousse de Maracujá', '1 lata de leite condensado, 1 lata de creme de leite, 1/2 xícara de suco concentrado de maracujá, 1 pacote de gelatina incolor sem sabor', '1. Dissolva a gelatina conforme as instruções da embalagem; 2. No liquidificador, bata o leite condensado, o creme de leite e o suco de maracujá; 3. Adicione a gelatina dissolvida e bata novamente até obter uma mistura homogênea; 4. Despeje a mistura em uma travessa e leve à geladeira por algumas horas até que a mousse fique firme. Sirva gelado.', 'Fácil', '20 minutos', 'Tudo Gostoso', '6 porções' );
+
+
+CREATE TABLE pratoprincipal (
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(255) NOT NULL,
+    ingredientes TEXT NOT NULL,
+    modo_preparo TEXT NOT NULL,
+    facilidade TEXT NOT NULL,
+    tempo_preparo TEXT NOT NULL,
+    autor TEXT NOT NULL,
+    rendimento TEXT NOT NULL,
+    PRIMARY KEY (id)
+  );

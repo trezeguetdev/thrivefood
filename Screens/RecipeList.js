@@ -6,7 +6,10 @@ export default function RecipeList({ navigation }) {
     const [recipes, setRecipes] = useState([]);
 
     useEffect(() => {
-        axios.get('http://192.168.18.2:3000/receitas')
+        axios.get('https://api-receitas-production.up.railway.app/receitas/vegano')
+        // axios.get('https://api-receitas-production.up.railway.app/receitas/sobremesa')
+        // axios.get('https://api-receitas-production.up.railway.app/receitas/pratoprincipal')
+        // axios.get('https://api-receitas-production.up.railway.app/receitas/entrada')
             .then(response => {
                 setRecipes(response.data);
             })
@@ -20,8 +23,8 @@ export default function RecipeList({ navigation }) {
             <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('RecipeDetail', { id: item.id })}>
                 <Image source={{ uri: item.image }} style={styles.cardImage} />
                 <View style={styles.cardText}>
-                    <Text style={styles.cardTitle}>{item.name}</Text>
-                    <Text style={styles.cardInfo}>{item.time} minutos | {item.portions} porções</Text>
+                    <Text style={styles.cardTitle}>{item.nome}</Text>
+                    <Text style={styles.cardInfo}>{item.tempo_preparo} | {item.rendimento}</Text>
                 </View>
             </TouchableOpacity>
         );
